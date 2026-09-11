@@ -46,7 +46,7 @@ Em hy vọng có cơ hội được đồng hành cùng {company_name} trong th�
 
 Đây là follow up email thứ nhất.
 
-""", #You can adjust your own email template here!
+""", #You can adjust your own email template here! I suggest to add a keyword and use the autotext function in Outlook, where it's mỏe easy to use collor text, images, etc.
     "FL2": """Hi {contact_person} ơi,
 
 Hôm trước em có giới thiệu sơ về dịch vụ mà bên em cung cấp.
