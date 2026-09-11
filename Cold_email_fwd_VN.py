@@ -2,17 +2,17 @@ import pandas as pd
 import datetime
 import pyperclip
 
-# === PHẦN 1: Đọc file Excel và lọc các dòng cần gửi mail hôm nay ===
-file_path = r"D:\HẢI DƯƠNG\Sales_Logistics_Leads_Template_New.xlsx"
+# === PART 1: Read the Excel file and filter the rows to send emails today. ===
+file_path = r"D:\**Your CEA_sample_input file path" ## Please paste the path to your sample file 'CEA_sample_input' here.
 sheet_name = "Cold_email_FWD_VN"
 
-# Đọc dữ liệu từ file Excel
+# Reading data from the Excel file.
 df = pd.read_excel(file_path, sheet_name=sheet_name)
 
-# Lấy ngày hôm nay
+# Get the date variable = today
 today = datetime.datetime.today().date()
 
-# Các cột follow-up
+# Follow-up columns
 followup_columns = [
     "Follow-up 1 Due",
     "Follow-up 2 Due",
@@ -29,24 +29,24 @@ for idx, row in df.iterrows():
                 due_date = due_date.date()
             if due_date == today:
                 fl = f"FL{i+1}"
-                excel_row = idx + 2  # Cộng 2 để khớp với dòng thật trong Excel
+                excel_row = idx + 2  # Add 2 to match the actual row in Excel.
                 print(f"{excel_row}:{fl}")
 
-# === PHẦN 2: Nhập thủ công để tạo nội dung email và tự động copy ===
+# === PART 2: Manually inputting and automatically copying email content ===
 print("\n---TẠO NỘI DUNG EMAIL THEO YÊU CẦU THỦ CÔNG---")
 print("Nhập cú pháp theo dạng: số dòng Excel và FL tương ứng (VD: 4 FL1)")
 print("Nhập 'x' để kết thúc.")
 
-# Mẫu email – thêm đầy đủ biến
+# Email template – add all variables
 email_templates = {
-    "FL1": """Dear {contact_person},
+    "FL1": """Dear {contact_person}, 
 
 Chúc {xung_ho} một ngày nhiều niềm vui!
 Em hy vọng có cơ hội được đồng hành cùng {company_name} trong thời gian tới.
 
 Đây là follow up email thứ nhất.
 
-""",
+""", #You can adjust your own email template here!
     "FL2": """Hi {contact_person} ơi,
 
 Hôm trước em có giới thiệu sơ về dịch vụ mà bên em cung cấp.
@@ -100,7 +100,7 @@ while True:
         xung_ho = df.at[index, "Xưng hô"]
         email = df.at[index, "Email"]
 
-        # Format nội dung email với các biến
+        # Format email content with variables
         message = email_templates[fl].format(
             xung_ho=xung_ho, contact_person=contact_person, company_name=company
         )
@@ -119,4 +119,4 @@ Subject: Follow-up from [Your Company] – {company}
 
     except Exception as e:
         print(f"Lỗi nhập: {e}. Vui lòng nhập lại theo cú pháp.")
-# Write your code here :-)
+
